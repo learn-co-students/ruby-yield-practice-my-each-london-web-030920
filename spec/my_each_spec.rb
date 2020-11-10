@@ -1,8 +1,7 @@
-require_relative 'spec_helper'
-require 'pry'
+require_relative "spec_helper"
 
 describe "my_each" do
-  file = File.read('./my_each.rb')
+  file = File.read("./my_each.rb")
 
   it "does not call on .each" do
     expect(file).to_not include(".each")
@@ -17,7 +16,7 @@ describe "my_each" do
   end
 
   it "iterates over each element" do
-    words = ['hi', 'hello', 'bye', 'goodbye']
+    words = ["hi", "hello", "bye", "goodbye"]
 
     # This line tests that each word gets printed out by the loop!
     expect($stdout).to receive(:puts).exactly(words.length).times
@@ -26,13 +25,13 @@ describe "my_each" do
     end
   end
 
-  it 'yields the correct element' do
-    words = ['hi', 'hello', 'bye', 'goodbye']
+  it "yields the correct element" do
+    words = ["hi", "hello", "bye", "goodbye"]
     counter = 0
 
     my_each(words) do |item|
       expect(item).to equal(words[counter])
-      counter+=1
+      counter += 1
     end
   end
 
@@ -49,17 +48,17 @@ describe "my_each" do
   end
 
   it "returned array contains the same elements as the original collection" do
-    tas = ['arel', 'jon', 'logan', 'spencer']
+    tas = ["arel", "jon", "logan", "spencer"]
 
     # run the method
     expect(my_each(tas) do |ta|
-    # Do nothing on yield
-    # check if it returns correct values
-    end).to contain_exactly('arel', 'jon', 'logan', 'spencer')
+      # Do nothing on yield
+      # check if it returns correct values
+    end).to contain_exactly("arel", "jon", "logan", "spencer")
   end
 
   it "does not modify the original collection" do
-    tas = ['arel', 'jon', 'logan', 'spencer']
+    tas = ["arel", "jon", "logan", "spencer"]
     # array may be modified by the iteration function so
     # we cannot use it for verifying the results
     # therefore we create a new copy using the clone method
@@ -76,7 +75,7 @@ describe "my_each" do
   end
 
   it "block is run n times" do
-    tas = ['arel', 'jon', 'logan', 'spencer']
+    tas = ["arel", "jon", "logan", "spencer"]
     expected = tas.length
     times_called = 0
 
@@ -88,8 +87,7 @@ describe "my_each" do
   end
 
   it "only passes a single element into the block at a time" do
-
-    tas = ['arel', 'jon', 'logan', 'spencer']
+    tas = ["arel", "jon", "logan", "spencer"]
 
     my_each(tas) do |ta|
       # ta cannot be an array
